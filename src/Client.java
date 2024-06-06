@@ -17,10 +17,35 @@
  */
 import java.io.*;
 import java.net.*;
+import java.util.Scanner;
 
-public class Client {
+public class Client
+{
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
 
+        Scanner scanner = new Scanner(System.in); //To scan for IP/Port being used
+
+        System.out.println("Enter IP: ");
+        String ip = scanner.nextLine(); //Takes user input port
+
+        System.out.println("Enter port");
+        int port = scanner.nextInt(); //Takes user input port
+        scanner.close();
+
+        try (Socket socket = new Socket(ip,port))
+        {
+            InputStream inputStream = socket.getInputStream();
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+
+            String time = bufferedReader.readLine();
+
+            System.out.println(time);
+
+        }catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
     }
 }
