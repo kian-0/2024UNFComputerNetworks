@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a5c34568-aa78-418c-bd2b-69bac1961f88" name="Changes" comment="Start of project">
-      <change afterPath="$PROJECT_DIR$/src/Client.java" afterDir="false" />
+    <list default="true" id="a5c34568-aa78-418c-bd2b-69bac1961f88" name="Changes" comment="Added Client and Server File">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Server.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -23,18 +24,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "Lentinal"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Lentinal&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/Lentinal/2024UNFComputerNetworks.git",
-    "accountId": "e4d62e34-86d5-489f-989e-886e68083bed"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Lentinal/2024UNFComputerNetworks.git&quot;,
+    &quot;accountId&quot;: &quot;e4d62e34-86d5-489f-989e-886e68083bed&quot;
   }
-}]]></component>
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 5
 }</component>
@@ -75,7 +76,8 @@
       <option name="presentableId" value="Default" />
       <updated>1716930458361</updated>
       <workItem from="1716930459448" duration="654000" />
-      <workItem from="1717697854946" duration="469000" />
+      <workItem from="1717697854946" duration="2245000" />
+      <workItem from="1717701196021" duration="1383000" />
     </task>
     <task id="LOCAL-00001" summary="Start of project">
       <option name="closed" value="true" />
@@ -85,7 +87,15 @@
       <option name="project" value="LOCAL" />
       <updated>1717697890686</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Added Client and Server File">
+      <option name="closed" value="true" />
+      <created>1717698404031</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1717698404031</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -104,6 +114,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Start of project" />
-    <option name="LAST_COMMIT_MESSAGE" value="Start of project" />
+    <MESSAGE value="Added Client and Server File" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added Client and Server File" />
   </component>
 </project>
