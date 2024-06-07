@@ -7,7 +7,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a5c34568-aa78-418c-bd2b-69bac1961f88" name="Changes" comment="Javadoc Comments and started main">
+    <list default="true" id="a5c34568-aa78-418c-bd2b-69bac1961f88" name="Changes" comment="Made base for server and client&#10;Server asks for port being used and opens a socket&#10;Client asks for server ip and port being used and opens inputStream to get information from Server">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Server.java" afterDir="false" />
@@ -45,7 +45,7 @@
   }
 }</component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="QODANA_PROBLEMS_VIEW_TAB" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 5
@@ -73,7 +73,7 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.Client">
     <configuration name="Client" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Client" />
       <module name="Inerative Socket Server" />
@@ -81,6 +81,17 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Server" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="Server" />
+      <module name="Inerative Socket Server" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.Server" />
+      <item itemvalue="Application.Client" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Client" />
@@ -105,7 +116,7 @@
       <updated>1716930458361</updated>
       <workItem from="1716930459448" duration="654000" />
       <workItem from="1717697854946" duration="2245000" />
-      <workItem from="1717701196021" duration="5776000" />
+      <workItem from="1717701196021" duration="14323000" />
     </task>
     <task id="LOCAL-00001" summary="Start of project">
       <option name="closed" value="true" />
@@ -131,7 +142,15 @@
       <option name="project" value="LOCAL" />
       <updated>1717702636827</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Made base for server and client&#10;Server asks for port being used and opens a socket&#10;Client asks for server ip and port being used and opens inputStream to get information from Server">
+      <option name="closed" value="true" />
+      <created>1717710176833</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1717710176833</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -152,6 +171,7 @@
     <MESSAGE value="Start of project" />
     <MESSAGE value="Added Client and Server File" />
     <MESSAGE value="Javadoc Comments and started main" />
-    <option name="LAST_COMMIT_MESSAGE" value="Javadoc Comments and started main" />
+    <MESSAGE value="Made base for server and client&#10;Server asks for port being used and opens a socket&#10;Client asks for server ip and port being used and opens inputStream to get information from Server" />
+    <option name="LAST_COMMIT_MESSAGE" value="Made base for server and client&#10;Server asks for port being used and opens a socket&#10;Client asks for server ip and port being used and opens inputStream to get information from Server" />
   </component>
 </project>
