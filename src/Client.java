@@ -15,16 +15,15 @@
  * Configured to examine, analyze, and study the effects an iterative server
  * has on the efficiency (average turn-around time) of processing client requests.
  */
+
 import java.io.*;
 import java.net.*;
 import java.util.Scanner;
 
-public class Client
-{
+public class Client {
 
-    public static void main(String[] args)
-    {
-
+    public static void main(String[] args) {
+        //User input IP/Port
         Scanner scanner = new Scanner(System.in); //To scan for IP/Port being used
 
         System.out.println("Enter IP: ");
@@ -32,20 +31,47 @@ public class Client
 
         System.out.println("Enter port");
         int port = scanner.nextInt(); //Takes user input port
-        scanner.close();
 
-        try (Socket socket = new Socket(ip,port))
-        {
-            InputStream inputStream = socket.getInputStream();
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+        //Try-Catch opening socket to server
+        try (Socket socket = new Socket(ip, port)) {
+            System.out.println("Connected to " + ip + ":" + port);
 
-            String time = bufferedReader.readLine();
+            System.out.println("Opening input stream");
+            InputStream inputStream = socket.getInputStream(); //Gets lines from server
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream)); //Reads lines from server
 
-            System.out.println(time);
+            System.out.println("Opening output stream");
+            OutputStream outputStream = socket.getOutputStream(); //Opens output stream to server
+            PrintWriter writer = new PrintWriter(outputStream, true); //Opens PrintWrite to server
 
-        }catch(Exception e)
-        {
+            //Client Menu
+            int clientChoice = 9; //Initializes choice and make sure it isn't an option or 0 to go to while
+            while (clientChoice != 0) {
+                System.out.println("Enter number of desired request");
+                System.out.println("1 - Date and Time");
+                System.out.println("2 - Uptime");
+                System.out.println("3 - Memory use");
+                System.out.println("4 - Netstat");
+                System.out.println("5 - Current users");
+                System.out.println("6 - Running processes");
+                System.out.println("0 - Exit");
+
+                clientChoice = scanner.nextInt();
+                System.out.println("Client choice " + clientChoice); //Debugging
+
+                //TO-DO Ask for how many requests/threads
+                //System.out.println("How many requests?");
+
+                writer.println(clientChoice); //Sends client choice to server
+                writer.flush(); //Clears writer (sender)
+
+                System.out.println(bufferedReader.readLine()); //Debugging prints out returned value from server.
+
+            }
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+
     }
+
 }
