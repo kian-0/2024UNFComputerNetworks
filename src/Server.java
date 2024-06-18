@@ -59,8 +59,8 @@ public class Server {
 
             while (clientChoice != 0) {
                 clientChoice = Character.getNumericValue(inputStreamReader.read()); //Gets client option choice
-                System.out.println(clientChoice); //Debugging
 
+                //System.out.println(clientChoice); //Debugging
                 //writer.println(clientChoice); //Debugging sends value back to client
 
                 switch (clientChoice) {
@@ -97,7 +97,7 @@ public class Server {
     }
 
     private static void date(PrintWriter writer){
-        writer.println(new Date().toString());
+        writer.println(new Date());
     }
 
 
