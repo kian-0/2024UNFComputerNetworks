@@ -39,6 +39,8 @@ public class Server {
         //Try-Catch for Server socket
         try (ServerSocket serverSocket = new ServerSocket(port)) //Opens Server
         {
+
+            System.out.println(InetAddress.getLocalHost());
             System.out.println("Server is listening on port: " + port); //Debugging
 
 
@@ -69,11 +71,11 @@ public class Server {
                         break;
 
                     case 2: //Uptime
-
+                            uptime(writer);
                         break;
 
                     case 3: //Memory Use
-
+                            memory(writer);
                         break;
 
                     case 4: //Netstat
@@ -96,9 +98,27 @@ public class Server {
         }
     }
 
+    /**
+     * Takes in writer object to send date over
+     * @param writer Output date to client
+     */
     private static void date(PrintWriter writer){
         writer.println(new Date());
     }
 
+    /**
+     * Takes in writer to send time device is on? in nanoseconds? I don't know need verification
+     * @param writer Output uptime to client
+     */
+    private static void uptime(PrintWriter writer){
+        writer.println(System.nanoTime());
+    }
 
+    /**
+     * Takes in writer to send free memory? in bits? needs verification
+     * @param writer Output free memory to client
+     */
+    private static void memory(PrintWriter writer){
+        writer.println(Runtime.getRuntime().freeMemory());
+    }
 }

@@ -29,7 +29,7 @@ public class Client {
         System.out.println("Enter IP: ");
         String ip = scanner.nextLine(); //Takes user input port
 
-        System.out.println("Enter port");
+        System.out.println("Enter port: ");
         int port = scanner.nextInt(); //Takes user input port
 
         //Try-Catch opening socket to server
@@ -47,31 +47,41 @@ public class Client {
             //Client Menu
             int clientChoice = 9; //Initializes choice and make sure it isn't an option or 0 to go to while
             while (clientChoice != 0) {
-                System.out.println("Enter number of desired request");
-                System.out.println("1 - Date and Time");
-                System.out.println("2 - Uptime");
-                System.out.println("3 - Memory use");
-                System.out.println("4 - Netstat");
-                System.out.println("5 - Current users");
-                System.out.println("6 - Running processes");
-                System.out.println("0 - Exit");
+                menu();
 
                 clientChoice = scanner.nextInt();
                 System.out.println("Client choice " + clientChoice); //Debugging
 
-                //TO-DO Ask for how many requests/threads
-                //System.out.println("How many requests?");
+                //TO-DO Ask for how many requests/threads. Make according to deliverables requirements
+                System.out.println("How many requests?");
+                int requests = scanner.nextInt();
 
-                writer.println(clientChoice); //Sends client choice to server
-                writer.flush(); //Clears writer (sender)
+                for (int i = 0; i < requests; i++) { //For loop temporary
+                    writer.println(clientChoice); //Sends client choice to server
+                    writer.flush(); //Clears writer (sender)
 
-                System.out.println(bufferedReader.readLine()); //Debugging prints out returned value from server.
+                    System.out.println(bufferedReader.readLine()); //Debugging prints out returned value from server.
+                }
 
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
 
+    }
+
+    /**
+     * Displays options when called
+     */
+    private static void menu(){
+        System.out.println("\r\n Enter the number of desired request");
+        System.out.println("1 - Date and Time");
+        System.out.println("2 - Uptime");
+        System.out.println("3 - Memory use");
+        System.out.println("4 - Netstat");
+        System.out.println("5 - Current users");
+        System.out.println("6 - Running processes");
+        System.out.println("0 - Exit \r\n");
     }
 
 }
