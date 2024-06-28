@@ -67,7 +67,7 @@ public class Server {
 
                     case 1: //Date and Time
                         System.out.println("1");
-                        writer.println(new Date().toString());
+                        writer.println(new Date());
                         writer.flush();
                         break;
 
