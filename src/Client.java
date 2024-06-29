@@ -49,8 +49,9 @@ public class Client {
                 System.out.println("Client choice " + clientChoice); //Debugging
 
                 //Ask for how many requests/threads.
+                boolean run = true;
                 int requests = 0;
-                while (requests == 0) { //While loop for amount of threads to be created
+                while (run) { //While loop for amount of threads to be created
                     System.out.println("How many requests? 1, 5, 10, 15, 20 or 25");
                     requests = scanner.nextInt();
                     switch (requests) { //Keeps looping to ensure valid amount
@@ -60,18 +61,21 @@ public class Client {
                         case 15:
                         case 20:
                         case 25:
+                            run = false;
                             System.out.println("Creating " + requests + " requests.");
                             break;
 
                         default:
-                            requests = 0;
                             System.out.println("Invalid request amount. Try again.");
+                            scanner.nextLine();
                             break;
                     }
                 }
+                scanner.nextLine();
 
                 //Threading Proto-Type
                 //Creates all the threads
+                System.out.println("Sending " + requests + " requests to " + ip + ":" + port);
                 for (int i = 0; i < requests; i++) {
                     myThread thread = new myThread();
                     thread.setValues(ip, port, clientChoice);
@@ -89,7 +93,10 @@ public class Client {
 
                     System.out.println("Time elapsed: " + elapsedTime + "ms");
                 }
+
+                threadArrayList.clear();
                 menu();
+
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());

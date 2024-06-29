@@ -31,6 +31,7 @@ public class Server {
      */
     public static void main(String[] args) {
         //User input Port
+
         Scanner scanner = new Scanner(System.in); //To scan for port being used
         System.out.println("Enter port");
         int port = scanner.nextInt(); //Takes user input port
@@ -72,12 +73,12 @@ public class Server {
                         break;
 
                     case 2: //Uptime
-                        writer.println(System.nanoTime()); //in nanoseconds? I don't know need verification
+                        writer.println(upTime()); //in nanoseconds? I don't know need verification
                         writer.flush();
                         break;
 
                     case 3: //Memory Use
-                        writer.println(Runtime.getRuntime().freeMemory()); //in bits? needs verification
+                        writer.println("Free Memory: " + Runtime.getRuntime().freeMemory()); //in bits? needs verification
                         writer.flush();
                         break;
 
@@ -99,5 +100,24 @@ public class Server {
         } catch (Exception e) { //Catches Exception from opening server socket
             System.out.println("Server Exception: " + e.getMessage());
         }
+    }
+
+    /**
+     * Calculates upTime from System.nanoTime()
+     * @return String of system uptime
+     */
+    private static String upTime(){
+        double nanoSeconds = System.nanoTime();     //Retrieves System time in nanoseconds
+        double upSeconds =  nanoSeconds/ 1000000000;//It complains if I try to directly convert nanoseconds to days
+        double upMinutes = upSeconds / 60;          //So I thought it would be cool to have it display to the seconds
+        double upHours = upMinutes / 60;            //There is prob a better way to calculate all of this but I
+        int upDays = (int) (upHours / 24);          //was at work, so I just made something quickly - Kian
+
+        //Calculate reminders to display
+        int hoursRemain = (int) (upHours % 24);
+        int minutesRemain = (int) (upMinutes % 60);
+        int secondsRemain = (int) (upSeconds % 60);
+
+        return(upDays + " :Days " + hoursRemain + " :Hours " + minutesRemain + " :Minutes " + secondsRemain + " :Seconds");
     }
 }
