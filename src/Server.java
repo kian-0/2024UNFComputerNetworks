@@ -80,12 +80,13 @@ public class Server {
                         writer.flush();
                         break;
                     case 4: //Netstat
-                        ProcessBuilder pro = new ProcessBuilder("netstat", "-s");
+                        ProcessBuilder pro = new ProcessBuilder("netstat", "-a");
                         Process process = pro.start();
                         BufferedReader buff = new BufferedReader(new InputStreamReader(process.getInputStream()));
-                        while(buff.ready()){
-                            writer.println(buff.readLine());
-                        }
+                        String test = buff.readLine();
+                        writer.print(test);
+                        buff.close();
+                        writer.println("end");
                         writer.flush();
                         break;
                     case 5: //Current Users
