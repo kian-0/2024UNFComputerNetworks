@@ -25,7 +25,7 @@ import java.util.Scanner;
 import static jdk.internal.org.jline.utils.Colors.s;
 
 /**
- * Server class for SSI
+ * Server class for ISS
  */
 public class Server {
 
@@ -104,6 +104,7 @@ public class Server {
                         writer.println(runningProcesses());
                         writer.println("end");
                         writer.flush();
+
                         break;
                 }
             }
