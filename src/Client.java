@@ -158,7 +158,7 @@ class myThread extends Thread {
 
             //Receiving from server
             while (bufferedReader.ready()) {
-                System.out.println(bufferedReader.readLine()); //Prints out the response from the server
+                System.out.println(bufferedReader.readLine()); //Prints out the response(s) from the server
             }
 
             //Closes all the input/output streams

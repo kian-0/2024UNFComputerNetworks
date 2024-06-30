@@ -81,15 +81,18 @@ public class Server {
                         break;
 
                     case 4: //Netstat
-
+                        writer.println(netstat());
+                        writer.flush();
                         break;
 
                     case 5: //Current Users
-
+                        writer.println(currentUsers());
+                        writer.flush();
                         break;
 
                     case 6: //Running Processes
-
+                        writer.println(runningProcesses());
+                        writer.flush();
                         break;
 
                 }
@@ -105,18 +108,18 @@ public class Server {
      * @return String of system uptime
      */
     private static String upTime(){
-        double nanoSeconds = System.nanoTime();     //Retrieves System time in nanoseconds
-        double upSeconds =  nanoSeconds/ 1000000000;//It complains if I try to directly convert nanoseconds to days
-        double upMinutes = upSeconds / 60;          //So I thought it would be cool to have it display to the seconds
-        double upHours = upMinutes / 60;            //There is prob a better way to calculate all of this but I
-        int upDays = (int) (upHours / 24);          //was at work, so I just made something quickly - Kian
+        double nanoSeconds = System.nanoTime();         //Retrieves System time in nanoseconds
+        double upSeconds =  nanoSeconds / 1000000000;   //It complains if I try to directly convert nanoseconds to days
+        double upMinutes = upSeconds / 60;              //So I thought it would be cool to have it display to the seconds
+        double upHours = upMinutes / 60;                //There is prob a better way to calculate all of this but I
+        int upDays = (int) (upHours / 24);              //was at work, so I just made something quickly - Kian
 
         //Calculate reminders to display
         int hoursRemain = (int) (upHours % 24);
         int minutesRemain = (int) (upMinutes % 60);
         int secondsRemain = (int) (upSeconds % 60);
 
-        return(upDays + " :Days " + hoursRemain + " :Hours " + minutesRemain + " :Minutes " + secondsRemain + " :Seconds");
+        return(upDays + ":Days " + hoursRemain + ":Hours " + minutesRemain + ":Minutes " + secondsRemain + ":Seconds");
     }
 
     private static String memory(){
@@ -124,5 +127,18 @@ public class Server {
 
         String s = "Free Memory: " + Runtime.getRuntime().freeMemory(); //Temp need
         return s;
+    }
+
+    private static String netstat(){
+        return "";
+    }
+
+    private static String currentUsers(){
+
+        return "";
+    }
+
+    private static String runningProcesses(){
+        return "";
     }
 }
