@@ -31,7 +31,6 @@ public class Server {
      */
     public static void main(String[] args) {
         //User input Port
-
         Scanner scanner = new Scanner(System.in); //To scan for port being used
         System.out.println("Enter port");
         int port = scanner.nextInt(); //Takes user input port
@@ -62,23 +61,22 @@ public class Server {
                 //writer.println(clientChoice); //Debugging sends value back to client
 
                 switch (clientChoice) {
-                    case -1:
+                    case -1: //Used on start up because it dies after a second set of requests are sent
                         System.out.println("Startup");
                         break;
 
                     case 1: //Date and Time
-                        System.out.println("1");
                         writer.println(new Date());
                         writer.flush();
                         break;
 
                     case 2: //Uptime
-                        writer.println(upTime()); //in nanoseconds? I don't know need verification
+                        writer.println(upTime()); //Calls upTime method to calculate system uptime in days hours mins secs
                         writer.flush();
                         break;
 
                     case 3: //Memory Use
-                        writer.println("Free Memory: " + Runtime.getRuntime().freeMemory()); //in bits? needs verification
+                        writer.println(memory()); //in bits? needs verification
                         writer.flush();
                         break;
 
@@ -119,5 +117,12 @@ public class Server {
         int secondsRemain = (int) (upSeconds % 60);
 
         return(upDays + " :Days " + hoursRemain + " :Hours " + minutesRemain + " :Minutes " + secondsRemain + " :Seconds");
+    }
+
+    private static String memory(){
+
+
+        String s = "Free Memory: " + Runtime.getRuntime().freeMemory(); //Temp need
+        return s;
     }
 }

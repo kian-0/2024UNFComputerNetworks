@@ -67,11 +67,11 @@ public class Client {
 
                         default:
                             System.out.println("Invalid request amount. Try again.");
-                            scanner.nextLine();
+                            scanner.nextLine(); //Clears any buffer/newline issues.
                             break;
                     }
                 }
-                scanner.nextLine();
+                scanner.nextLine();             //Clears and buffer/newline issues.
 
                 //Threading Proto-Type
                 //Creates all the threads
@@ -83,21 +83,29 @@ public class Client {
                 }
 
                 //Starts up all the threads
+                long totalTime = 0; //Have to use long as the System.currentTimeMillis is in long
                 for (int i = 0; i < requests; i++) {
-                    long startTime = System.currentTimeMillis();
-                    threadArrayList.get(i).start();
-                    threadArrayList.get(i).join();
-                    long endTime = System.currentTimeMillis();
+                    long startTime = System.currentTimeMillis(); //Starts "timer". gets start time
+                    threadArrayList.get(i).start();//Starts thread
+                    threadArrayList.get(i).join(); //Waits for the thread to die. I think this is fine for single thread not multi? -Kian
+                    long endTime = System.currentTimeMillis(); //Ends "timer". Gets end time
 
-                    long elapsedTime = endTime - startTime;
+                    long elapsedTime = endTime - startTime; //Calculate elapsedTime.
+                    totalTime += elapsedTime;
 
                     System.out.println("Time elapsed: " + elapsedTime + "ms");
                 }
 
-                threadArrayList.clear();
-                menu();
+                //Display total response time and average per request
+                long avgTime = totalTime / requests;
+                System.out.println("Average response time: " + avgTime + "ms");
+                System.out.println("Total response time: " + totalTime + "ms");
+
+                threadArrayList.clear();    //Clears threadArraylist, Bricks and dies when you send another request if removed.
+                menu();                     //Calls for menu
 
             }
+
         } catch (Exception e) {
             System.out.println(e.getMessage());
 
@@ -124,7 +132,6 @@ class myThread extends Thread {
     private int port;
     private int clientChoice;
 
-
     @Override
     public void run() {
         try (Socket socket = new Socket(ip, port)) {
@@ -150,8 +157,9 @@ class myThread extends Thread {
             }
 
             //Receiving from server
+            while (bufferedReader.ready()) {
                 System.out.println(bufferedReader.readLine()); //Prints out the response from the server
-
+            }
 
             //Closes all the input/output streams
             writer.close();
@@ -163,15 +171,16 @@ class myThread extends Thread {
     }
 
     /**
-     * A constructor? I feel like this is unnecessary, but I am not entirely sure what I'm doing anyway.
-     * @param ip IP of the server
-     * @param port Port of the server
+     * A pseudo-constructor? I feel like this is unnecessary, but I am not entirely sure what I'm doing.
+     * I don't know another way to allow myThread to open and close the socket without giving them like this.
+     * Because I wasn't sure how to or if it was even possible to pass stuff in to the .run()  -Kian
+     * @param ip           IP of the server
+     * @param port         Port of the server
      * @param clientChoice Number of the operation chosen
      */
     public void setValues(String ip, int port, int clientChoice) {
         this.ip = ip;
         this.port = port;
         this.clientChoice = clientChoice;
-
     }
 }
