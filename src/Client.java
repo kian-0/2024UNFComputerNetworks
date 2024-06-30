@@ -150,17 +150,9 @@ class myThread extends Thread {
             //Sending to server
             writer.println(clientChoice); //Sends client choice to the server
 
-            //Waits until the buffered reader has something in it
-            while (!bufferedReader.ready()) {
-                //noinspection BusyWait
-                sleep(1);
-            }
+            //Continues to read BufferedReader until it gets reads end from server
+            while(!bufferedReader.readLine().equals("end")){
 
-            //Receiving from server
-            while (bufferedReader.ready()) {
-
-                sleep(10);
-                System.out.println(bufferedReader.readLine()); //Prints out the response(s) from the server
             }
 
             //Closes all the input/output streams

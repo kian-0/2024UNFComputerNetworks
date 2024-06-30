@@ -18,6 +18,7 @@
 
 import java.io.*;
 import java.net.*;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -126,8 +127,8 @@ public class Server {
     }
 
     private static String memory(){
-        String s = "Free Memory: " + Runtime.getRuntime().freeMemory(); //Temp need
-        return s;
+        return  "Free Memory: " + Runtime.getRuntime().freeMemory() + "\r\nMax Memory: " + Runtime.getRuntime().maxMemory() + "\r\nTotal Memory: " + Runtime.getRuntime().totalMemory(); //Temp need
+
     }
 
     private static String netstat() { //Gonna test but i might just have it perform inside of the case bc of the writer
@@ -141,9 +142,10 @@ public class Server {
         return "Working on this -Delanie";
     }
 
+    private static String currentUsers() throws UnknownHostException {
+            InetAddress[] userList = InetAddress.getAllByName(InetAddress.getLocalHost().getHostName());
+        return Arrays.toString(InetAddress.getAllByName(InetAddress.getLocalHost().getHostName()));
 
-    private static String currentUsers(){
-        return "";
     }
 
     private static String runningProcesses(){
