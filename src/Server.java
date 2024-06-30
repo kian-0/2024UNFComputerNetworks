@@ -40,6 +40,7 @@ public class Server {
         //Try-Catch for Server socket
         try (ServerSocket serverSocket = new ServerSocket(port)) //Opens Server
         {
+
             while (true) {
                 System.out.println(InetAddress.getLocalHost());
                 System.out.println("Server is listening on port: " + port); //Debugging
