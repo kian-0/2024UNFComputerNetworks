@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="AnalysisUIOptions">
-    <option name="ANALYZE_INJECTED_CODE" value="false" />
-  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a5c34568-aa78-418c-bd2b-69bac1961f88" name="Changes" comment="Changed input/out for both server/client&#10;Started switch case&#10;Commented">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="a5c34568-aa78-418c-bd2b-69bac1961f88" name="Changes" comment="Got threading system to work&#10;Started private methods for server functions">
+
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Server.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -27,7 +25,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="06-25-24-Kian" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -44,9 +42,6 @@
     &quot;accountId&quot;: &quot;e4d62e34-86d5-489f-989e-886e68083bed&quot;
   }
 }</component>
-  <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
-  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 5
 }</component>
@@ -56,36 +51,40 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Client.executor": "Run",
-    "Application.Server.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
-    "kotlin-language-version-configured": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Client.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Server.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;DelanieFromThreadRedux&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/olive/Documents/Java Games&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;settings.sync&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+
   }
-}]]></component>
-  <component name="RunManager" selected="Application.Server">
-    <configuration name="Client" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+}</component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.Client">
+    <configuration name="Client" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Client" />
       <module name="Inerative Socket Server" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Server" type="Application" factoryName="Application">
+    <configuration name="Server" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Server" />
       <module name="Inerative Socket Server" />
       <method v="2">
@@ -96,11 +95,6 @@
       <item itemvalue="Application.Server" />
       <item itemvalue="Application.Client" />
     </list>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Application.Client" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -119,8 +113,11 @@
       <updated>1716930458361</updated>
       <workItem from="1716930459448" duration="654000" />
       <workItem from="1717697854946" duration="2245000" />
-      <workItem from="1717701196021" duration="23796000" />
-      <workItem from="1719764479680" duration="2082000" />
+
+      <workItem from="1717701196021" duration="1383000" />
+      <workItem from="1719343421741" duration="6356000" />
+      <workItem from="1719509970693" duration="6029000" />
+
     </task>
     <task id="LOCAL-00001" summary="Start of project">
       <option name="closed" value="true" />
@@ -138,47 +135,31 @@
       <option name="project" value="LOCAL" />
       <updated>1717698404031</updated>
     </task>
-    <task id="LOCAL-00003" summary="Javadoc Comments and started main">
+    <task id="LOCAL-00003" summary="Temp # of requests&#10;Proto-Typed: uptime and memory">
       <option name="closed" value="true" />
-      <created>1717702636827</created>
+      <created>1719354910363</created>
       <option name="number" value="00003" />
       <option name="presentableId" value="LOCAL-00003" />
       <option name="project" value="LOCAL" />
-      <updated>1717702636827</updated>
+      <updated>1719354910363</updated>
     </task>
-    <task id="LOCAL-00004" summary="Made base for server and client&#10;Server asks for port being used and opens a socket&#10;Client asks for server ip and port being used and opens inputStream to get information from Server">
+    <task id="LOCAL-00004" summary="Redo attempt for threading">
       <option name="closed" value="true" />
-      <created>1717710176833</created>
+      <created>1719541737485</created>
       <option name="number" value="00004" />
       <option name="presentableId" value="LOCAL-00004" />
       <option name="project" value="LOCAL" />
-      <updated>1717710176833</updated>
+      <updated>1719541737485</updated>
     </task>
-    <task id="LOCAL-00005" summary="Changed input/out for both server/client&#10;Started switch case">
+    <task id="LOCAL-00005" summary="Got threading system to work&#10;Started private methods for server functions">
       <option name="closed" value="true" />
-      <created>1717721629168</created>
+      <created>1719723878739</created>
       <option name="number" value="00005" />
       <option name="presentableId" value="LOCAL-00005" />
       <option name="project" value="LOCAL" />
-      <updated>1717721629168</updated>
+      <updated>1719723878739</updated>
     </task>
-    <task id="LOCAL-00006" summary="Changed input/out for both server/client&#10;Started switch case">
-      <option name="closed" value="true" />
-      <created>1718143130114</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1718143130115</updated>
-    </task>
-    <task id="LOCAL-00007" summary="Changed input/out for both server/client&#10;Started switch case&#10;Commented">
-      <option name="closed" value="true" />
-      <created>1718736443496</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1718736443496</updated>
-    </task>
-    <option name="localTasksCounter" value="8" />
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -189,7 +170,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="master" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -198,10 +191,9 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Start of project" />
     <MESSAGE value="Added Client and Server File" />
-    <MESSAGE value="Javadoc Comments and started main" />
-    <MESSAGE value="Made base for server and client&#10;Server asks for port being used and opens a socket&#10;Client asks for server ip and port being used and opens inputStream to get information from Server" />
-    <MESSAGE value="Changed input/out for both server/client&#10;Started switch case" />
-    <MESSAGE value="Changed input/out for both server/client&#10;Started switch case&#10;Commented" />
-    <option name="LAST_COMMIT_MESSAGE" value="Changed input/out for both server/client&#10;Started switch case&#10;Commented" />
+    <MESSAGE value="Temp # of requests&#10;Proto-Typed: uptime and memory" />
+    <MESSAGE value="Redo attempt for threading" />
+    <MESSAGE value="Got threading system to work&#10;Started private methods for server functions" />
+    <option name="LAST_COMMIT_MESSAGE" value="Got threading system to work&#10;Started private methods for server functions" />
   </component>
 </project>
