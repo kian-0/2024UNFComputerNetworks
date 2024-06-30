@@ -22,6 +22,8 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.Scanner;
 
+import static jdk.internal.org.jline.utils.Colors.s;
+
 /**
  * Server class for SSI
  */
@@ -36,7 +38,6 @@ public class Server {
         System.out.println("Enter port");
         int port = scanner.nextInt(); //Takes user input port
         scanner.close();
-
 
         //Try-Catch for Server socket
         try (ServerSocket serverSocket = new ServerSocket(port)) //Opens Server
@@ -66,45 +67,46 @@ public class Server {
                     case -1: //Used on start up because it dies after a second set of requests are sent
                         System.out.println("Startup");
                         break;
-
                     case 1: //Date and Time
                         writer.println(new Date());
                         writer.flush();
                         break;
-
                     case 2: //Uptime
                         writer.println(upTime()); //Calls upTime method to calculate system uptime in days hours mins secs
                         writer.flush();
                         break;
-
                     case 3: //Memory Use
                         writer.println(memory()); //in bits? needs verification
                         writer.flush();
                         break;
-
                     case 4: //Netstat
-                        writer.println(netstat());
+                        String s = null;
+                        String [] commands = {"netstat"};
+                        Process pro2 = Runtime.getRuntime().exec(commands); //builds the process
+                        BufferedReader buff = new BufferedReader(new InputStreamReader(pro2.getInputStream()));
+
+                        while ((s = buff.readLine()) != null) {
+                            System.out.println(s);
+                            writer.println(s);
+                        }
+                        buff.close();
+                        writer.println("end");
                         writer.flush();
                         break;
-
                     case 5: //Current Users
                         writer.println(currentUsers());
                         writer.flush();
                         break;
-
                     case 6: //Running Processes
                         writer.println(runningProcesses());
                         writer.flush();
                         break;
-
                 }
-
             }
         } catch (Exception e) { //Catches Exception from opening server socket
             System.out.println("Server Exception: " + e.getMessage());
         }
     }
-
     /**
      * Calculates upTime from System.nanoTime()
      * @return String of system uptime
@@ -126,15 +128,24 @@ public class Server {
 
     private static String memory(){
         return  "Free Memory: " + Runtime.getRuntime().freeMemory() + "\r\nMax Memory: " + Runtime.getRuntime().maxMemory() + "\r\nTotal Memory: " + Runtime.getRuntime().totalMemory(); //Temp need
+
     }
 
-    private static String netstat(){
-        return "";
+    private static String netstat() { //Gonna test but i might just have it perform inside of the case bc of the writer
+        try{
+            ProcessBuilder pro = new ProcessBuilder("netstat", "-s");
+            Process process = pro.start();
+        }
+        catch (Exception e){
+            throw new RuntimeException(e);
+        }
+        return "Working on this -Delanie";
     }
 
     private static String currentUsers() throws UnknownHostException {
             InetAddress[] userList = InetAddress.getAllByName(InetAddress.getLocalHost().getHostName());
         return Arrays.toString(InetAddress.getAllByName(InetAddress.getLocalHost().getHostName()));
+
     }
 
     private static String runningProcesses(){
