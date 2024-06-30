@@ -75,16 +75,19 @@ public class Server {
                         writer.flush();
                         break;
                     case 3: //Memory Use
-
                         writer.println(memory()); //in bits? needs verification
                         writer.flush();
                         break;
                     case 4: //Netstat
-                        ProcessBuilder pro = new ProcessBuilder("netstat", "-a");
-                        Process process = pro.start();
-                        BufferedReader buff = new BufferedReader(new InputStreamReader(process.getInputStream()));
-                        String test = buff.readLine();
-                        writer.print(test);
+                        String s = null;
+                        String [] commands = {"netstat"};
+                        Process pro2 = Runtime.getRuntime().exec(commands); //builds the process
+                        BufferedReader buff = new BufferedReader(new InputStreamReader(pro2.getInputStream()));
+
+                        while ((s = buff.readLine()) != null) {
+                            System.out.println(s);
+                            writer.println(s);
+                        }
                         buff.close();
                         writer.println("end");
                         writer.flush();

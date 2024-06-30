@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="a5c34568-aa78-418c-bd2b-69bac1961f88" name="Changes" comment="Got threading system to work&#10;Started private methods for server functions">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Server.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -191,5 +192,12 @@
     <MESSAGE value="Redo attempt for threading" />
     <MESSAGE value="Got threading system to work&#10;Started private methods for server functions" />
     <option name="LAST_COMMIT_MESSAGE" value="Got threading system to work&#10;Started private methods for server functions" />
+  </component>
+  <component name="XDebuggerManager">
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="java.net.Socket" memberName="out" />
+      </pinned-members>
+    </pin-to-top-manager>
   </component>
 </project>
