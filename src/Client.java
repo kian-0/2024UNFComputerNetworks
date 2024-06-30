@@ -151,8 +151,10 @@ class myThread extends Thread {
             writer.println(clientChoice); //Sends client choice to the server
 
             //Continues to read BufferedReader until it gets reads end from server
-            while(!bufferedReader.readLine().equals("end")){
-
+            String serverResponse = bufferedReader.readLine(); //Gets the first line
+            while(!serverResponse.equals("end")){ //Loops until it gets and end response from the server
+                System.out.println(serverResponse); //prints out server response
+                serverResponse = bufferedReader.readLine(); //reads next line from server.
             }
 
             //Closes all the input/output streams

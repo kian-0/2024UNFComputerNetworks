@@ -69,14 +69,17 @@ public class Server {
                         break;
                     case 1: //Date and Time
                         writer.println(new Date());
+                        writer.println("end");
                         writer.flush();
                         break;
                     case 2: //Uptime
                         writer.println(upTime()); //Calls upTime method to calculate system uptime in days hours mins secs
+                        writer.println("end");
                         writer.flush();
                         break;
                     case 3: //Memory Use
                         writer.println(memory()); //in bits? needs verification
+                        writer.println("end");
                         writer.flush();
                         break;
                     case 4: //Netstat
@@ -84,9 +87,8 @@ public class Server {
                         String [] commands = {"netstat"};
                         Process pro2 = Runtime.getRuntime().exec(commands); //builds the process
                         BufferedReader buff = new BufferedReader(new InputStreamReader(pro2.getInputStream()));
-
                         while ((s = buff.readLine()) != null) {
-                            System.out.println(s);
+                            //System.out.println(s); Debugging
                             writer.println(s);
                         }
                         buff.close();
@@ -95,10 +97,12 @@ public class Server {
                         break;
                     case 5: //Current Users
                         writer.println(currentUsers());
+                        writer.println("end");
                         writer.flush();
                         break;
                     case 6: //Running Processes
                         writer.println(runningProcesses());
+                        writer.println("end");
                         writer.flush();
                         break;
                 }
@@ -129,17 +133,6 @@ public class Server {
     private static String memory(){
         return  "Free Memory: " + Runtime.getRuntime().freeMemory() + "\r\nMax Memory: " + Runtime.getRuntime().maxMemory() + "\r\nTotal Memory: " + Runtime.getRuntime().totalMemory(); //Temp need
 
-    }
-
-    private static String netstat() { //Gonna test but i might just have it perform inside of the case bc of the writer
-        try{
-            ProcessBuilder pro = new ProcessBuilder("netstat", "-s");
-            Process process = pro.start();
-        }
-        catch (Exception e){
-            throw new RuntimeException(e);
-        }
-        return "Working on this -Delanie";
     }
 
     private static String currentUsers() throws UnknownHostException {
