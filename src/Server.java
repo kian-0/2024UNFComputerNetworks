@@ -22,7 +22,7 @@ import java.util.Date;
 import java.util.Scanner;
 
 /**
- * Server class for SSI
+ * Server class for ISS
  */
 public class Server {
 
@@ -40,7 +40,6 @@ public class Server {
         try (ServerSocket serverSocket = new ServerSocket(port)) //Opens Server
         {
             System.out.println("Server is listening on port: " + port); //Debugging
-
 
                 Socket socket = serverSocket.accept(); //Taking in client connection
                 System.out.println("Client connected");
@@ -67,38 +66,23 @@ public class Server {
                     case 1: //Date and Time
                             date(writer);
                         break;
-
                     case 2: //Uptime
-
                         break;
-
                     case 3: //Memory Use
-
                         break;
-
                     case 4: //Netstat
-
                         break;
-
                     case 5: //Current Users
-
                         break;
-
                     case 6: //Running Processes
-
                         break;
-
                 }
-
             }
         } catch (Exception e) { //Catches Exception from opening server socket
             System.out.println("Server Exception: " + e.getMessage());
         }
     }
-
     private static void date(PrintWriter writer){
         writer.println(new Date());
     }
-
-
 }
