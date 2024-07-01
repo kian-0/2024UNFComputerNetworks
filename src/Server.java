@@ -78,13 +78,16 @@ public class Server {
                         writer.flush();
                         break;
                     case 3: //Memory Use
-                        writer.println(memory()); //in bits? needs verification
+                        long memUsage = memory();
+                        long memUsageMB = memUsage / 1024;
+                        writer.println("Total usage: " + memUsage + " bytes"); //confirmed in bytes
+                        writer.println("Total usage in kB: " + memUsageMB + " kB"); //converted to MB
                         writer.println("end");
                         writer.flush();
                         break;
                     case 4: //Netstat
-                        String s = null;
-                        String [] commands = {"netstat"};
+                        String s;
+                        String[] commands = {"netstat"};
                         Process pro2 = Runtime.getRuntime().exec(commands); //builds the process
                         BufferedReader buff = new BufferedReader(new InputStreamReader(pro2.getInputStream()));
                         while ((s = buff.readLine()) != null) {
@@ -101,17 +104,17 @@ public class Server {
                         writer.flush();
                         break;
                     case 6: //Running Processes
-                        String runOutput = null;
-                        String [] runCommand = {"tasklist"}; //command
+                        String runOutput;
+                        String[] runCommand = {"tasklist"}; //command
                         Process runPro = Runtime.getRuntime().exec(runCommand); //process from the command
                         BufferedReader buffy = new BufferedReader(new InputStreamReader(runPro.getInputStream())); //read the output from runPro
 
-                        while((runOutput = buffy.readLine()) != null){ //check if there is still output
+                        while ((runOutput = buffy.readLine()) != null) { //check if there is still output
                             writer.println(runOutput); //send the output to the client
                         }
-                        //writer.println(runningProcesses()); //REMOVE???
+
                         buffy.close(); //close the buffered reader
-                        writer.println("end");
+                        writer.println("end"); //delimiter
                         writer.flush();
                         break;
                 }
@@ -120,13 +123,15 @@ public class Server {
             System.out.println("Server Exception: " + e.getMessage());
         }
     }
+
     /**
      * Calculates upTime from System.nanoTime()
+     *
      * @return String of system uptime
      */
-    private static String upTime(){
+    private static String upTime() {
         double nanoSeconds = System.nanoTime();         //Retrieves System time in nanoseconds
-        double upSeconds =  nanoSeconds / 1000000000;   //It complains if I try to directly convert nanoseconds to days
+        double upSeconds = nanoSeconds / 1000000000;   //It complains if I try to directly convert nanoseconds to days
         double upMinutes = upSeconds / 60;              //So I thought it would be cool to have it display to the seconds
         double upHours = upMinutes / 60;                //There is prob a better way to calculate all of this but I
         int upDays = (int) (upHours / 24);              //was at work, so I just made something quickly - Kian
@@ -136,21 +141,16 @@ public class Server {
         int minutesRemain = (int) (upMinutes % 60);
         int secondsRemain = (int) (upSeconds % 60);
 
-        return(upDays + ":Days " + hoursRemain + ":Hours " + minutesRemain + ":Minutes " + secondsRemain + ":Seconds");
+        return (upDays + ":Days " + hoursRemain + ":Hours " + minutesRemain + ":Minutes " + secondsRemain + ":Seconds");
     }
 
-    private static String memory(){
-        return  "Free Memory: " + Runtime.getRuntime().freeMemory() + "\r\nMax Memory: " + Runtime.getRuntime().maxMemory() + "\r\nTotal Memory: " + Runtime.getRuntime().totalMemory(); //Temp need
-
+    private static long memory() {
+        //return  "Free Memory: " + Runtime.getRuntime().freeMemory() + "\r\nMax Memory: " + Runtime.getRuntime().maxMemory() + "\r\nTotal Memory: " + Runtime.getRuntime().totalMemory(); //Temp need
+        return Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory(); //returns memory usage in bytes
     }
 
     private static String currentUsers() throws UnknownHostException {
-            InetAddress[] userList = InetAddress.getAllByName(InetAddress.getLocalHost().getHostName());
+        InetAddress[] userList = InetAddress.getAllByName(InetAddress.getLocalHost().getHostName());
         return Arrays.toString(InetAddress.getAllByName(InetAddress.getLocalHost().getHostName()));
-
-    }
-
-    private static String runningProcesses(){
-        return "";
     }
 }
