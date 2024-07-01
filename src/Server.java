@@ -101,10 +101,18 @@ public class Server {
                         writer.flush();
                         break;
                     case 6: //Running Processes
-                        writer.println(runningProcesses());
+                        String runOutput = null;
+                        String [] runCommand = {"tasklist"}; //command
+                        Process runPro = Runtime.getRuntime().exec(runCommand); //process from the command
+                        BufferedReader buffy = new BufferedReader(new InputStreamReader(runPro.getInputStream())); //read the output from runPro
+
+                        while((runOutput = buffy.readLine()) != null){ //check if there is still output
+                            writer.println(runOutput); //send the output to the client
+                        }
+                        //writer.println(runningProcesses()); //REMOVE???
+                        buffy.close(); //close the buffered reader
                         writer.println("end");
                         writer.flush();
-
                         break;
                 }
             }
