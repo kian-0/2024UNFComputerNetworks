@@ -18,7 +18,6 @@
 
 import java.io.*;
 import java.net.*;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -84,34 +83,17 @@ public class Server {
                         writer.flush();
                         break;
                     case 4: //Netstat
-                        String netstat;
-                        String[] commands = {"netstat"};
-                        Process pro2 = Runtime.getRuntime().exec(commands); //builds the process
-                        BufferedReader buff = new BufferedReader(new InputStreamReader(pro2.getInputStream()));
-                        while ((netstat = buff.readLine()) != null) {
-                            //System.out.println(s); Debugging
-                            writer.println(netstat);
-                        }
-                        buff.close();
+                        unixCommand(new String[]{"netstat"}, writer);
                         writer.println("end");
                         writer.flush();
                         break;
                     case 5: //Current Users
-                        writer.println(currentUsers());
+                        unixCommand(new String[]{"w"}, writer);
                         writer.println("end");
                         writer.flush();
                         break;
                     case 6: //Running Processes
-                        String runOutput;
-                        String[] runCommand = {"tasklist"}; //command
-                        Process runPro = Runtime.getRuntime().exec(runCommand); //process from the command
-                        BufferedReader buffy = new BufferedReader(new InputStreamReader(runPro.getInputStream())); //read the output from runPro
-
-                        while ((runOutput = buffy.readLine()) != null) { //check if there is still output
-                            writer.println(runOutput); //send the output to the client
-                        }
-
-                        buffy.close(); //close the buffered reader
+                        unixCommand(new String[]{"ps","-aux"}, writer);
                         writer.println("end"); //delimiter
                         writer.flush();
                         break;
@@ -142,13 +124,24 @@ public class Server {
         return (upDays + ":Days " + hoursRemain + ":Hours " + minutesRemain + ":Minutes " + secondsRemain + ":Seconds");
     }
 
+    /**
+     * Calculates memory usage
+     * @return total memory string
+     */
     private static long memory() {
         //return  "Free Memory: " + Runtime.getRuntime().freeMemory() + "\r\nMax Memory: " + Runtime.getRuntime().maxMemory() + "\r\nTotal Memory: " + Runtime.getRuntime().totalMemory(); //Temp need
         return Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory(); //returns memory usage in bytes
     }
 
-    private static String currentUsers() throws UnknownHostException {
-        //InetAddress[] userList = InetAddress.getAllByName(InetAddress.getLocalHost().getHostName());
-        return Arrays.toString(InetAddress.getAllByName(InetAddress.getLocalHost().getHostName()));
+
+    private static void unixCommand(String [] commands, PrintWriter writer) throws IOException {
+        String toCLient;
+        Process pro2 = Runtime.getRuntime().exec(commands); //builds the process
+        BufferedReader buff = new BufferedReader(new InputStreamReader(pro2.getInputStream()));
+        while ((toCLient = buff.readLine()) != null) {
+            //System.out.println(s); Debugging
+            writer.println(toCLient);
+        }
+        buff.close();
     }
 }

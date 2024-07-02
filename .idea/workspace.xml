@@ -4,8 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a5c34568-aa78-418c-bd2b-69bac1961f88" name="Changes" comment="Created upTime method to calculate system uptime">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="a5c34568-aa78-418c-bd2b-69bac1961f88" name="Changes" comment="Fixed typos">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Server.java" afterDir="false" />
     </list>
@@ -73,7 +72,7 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Client">
+  <component name="RunManager" selected="Application.Server">
     <configuration name="Client" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Client" />
       <module name="Inerative Socket Server" />
@@ -143,7 +142,15 @@
       <option name="project" value="LOCAL" />
       <updated>1719703991518</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Fixed typos">
+      <option name="closed" value="true" />
+      <created>1719951168242</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1719951168242</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -177,6 +184,7 @@
     <MESSAGE value="Added Client and Server File" />
     <MESSAGE value="Temp # of requests&#10;Proto-Typed: uptime and memory" />
     <MESSAGE value="Created upTime method to calculate system uptime" />
-    <option name="LAST_COMMIT_MESSAGE" value="Created upTime method to calculate system uptime" />
+    <MESSAGE value="Fixed typos" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed typos" />
   </component>
 </project>
