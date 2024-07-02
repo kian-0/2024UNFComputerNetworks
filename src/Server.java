@@ -18,7 +18,6 @@
 
 import java.io.*;
 import java.net.*;
-import java.util.Date;
 import java.util.Scanner;
 
 /**
@@ -65,36 +64,33 @@ public class Server {
                         System.out.println("Startup");
                         break;
                     case 1: //Date and Time
-                        writer.println(new Date());
-                        writer.println("end");
+                        unixCommand(new String[]{"date"}, writer); //Calls date method
+                        writer.println("end"); //End of transmission flag
                         writer.flush();
                         break;
                     case 2: //Uptime
-                        writer.println(upTime()); //Calls upTime method to calculate system uptime in days hours mins secs
-                        writer.println("end");
+                        unixCommand(new String[]{"uptime"}, writer);
+                        writer.println("end"); //End of transmission flag
                         writer.flush();
                         break;
                     case 3: //Memory Use
-                        long memUsage = memory();
-                        long memUsageMB = memUsage / 1024;
-                        writer.println("Total usage: " + memUsage + " bytes"); //confirmed in bytes
-                        writer.println("Total usage in kB: " + memUsageMB + " kB"); //converted to MB
-                        writer.println("end");
+                        unixCommand(new String[]{"free"}, writer);
+                        writer.println("end"); //End of transmission flag
                         writer.flush();
                         break;
                     case 4: //Netstat
-                        unixCommand(new String[]{"netstat"}, writer);
-                        writer.println("end");
+                        unixCommand(new String[]{"netstat"}, writer); //Sends netstat command and writer to unixCommand()
+                        writer.println("end"); //End of transmission flag
                         writer.flush();
                         break;
                     case 5: //Current Users
-                        unixCommand(new String[]{"w"}, writer);
-                        writer.println("end");
+                        unixCommand(new String[]{"w"}, writer); //Sends w command(CurrentUsers) and writer to unixCommand()
+                        writer.println("end"); //End of transmission flag
                         writer.flush();
                         break;
                     case 6: //Running Processes
-                        unixCommand(new String[]{"ps","-aux"}, writer);
-                        writer.println("end"); //delimiter
+                        unixCommand(new String[]{"ps", "-aux"}, writer); //Sends ps -aux (Running processes) and writer to unixCommand
+                        writer.println("end"); //End of transmission flag
                         writer.flush();
                         break;
                 }
@@ -105,43 +101,21 @@ public class Server {
     }
 
     /**
-     * Calculates upTime from System.nanoTime()
+     * Takes unix Command array and prints to server.
      *
-     * @return String of system uptime
+     * @param commands UnixCommand array
+     * @param writer   writer to client
+     * @throws IOException exception thrower
      */
-    private static String upTime() {
-        double nanoSeconds = System.nanoTime();         //Retrieves System time in nanoseconds
-        double upSeconds = nanoSeconds / 1000000000;   //It complains if I try to directly convert nanoseconds to days
-        double upMinutes = upSeconds / 60;              //So I thought it would be cool to have it display to the seconds
-        double upHours = upMinutes / 60;                //There is prob a better way to calculate all of this but I
-        int upDays = (int) (upHours / 24);              //was at work, so I just made something quickly - Kian
-
-        //Calculate reminders to display
-        int hoursRemain = (int) (upHours % 24);
-        int minutesRemain = (int) (upMinutes % 60);
-        int secondsRemain = (int) (upSeconds % 60);
-
-        return (upDays + ":Days " + hoursRemain + ":Hours " + minutesRemain + ":Minutes " + secondsRemain + ":Seconds");
-    }
-
-    /**
-     * Calculates memory usage
-     * @return total memory string
-     */
-    private static long memory() {
-        //return  "Free Memory: " + Runtime.getRuntime().freeMemory() + "\r\nMax Memory: " + Runtime.getRuntime().maxMemory() + "\r\nTotal Memory: " + Runtime.getRuntime().totalMemory(); //Temp need
-        return Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory(); //returns memory usage in bytes
-    }
-
-
-    private static void unixCommand(String [] commands, PrintWriter writer) throws IOException {
-        String toCLient;
+    private static void unixCommand(String[] commands, PrintWriter writer) throws IOException {
+        String returnLines; //Initiates string being sent to client
         Process pro2 = Runtime.getRuntime().exec(commands); //builds the process
-        BufferedReader buff = new BufferedReader(new InputStreamReader(pro2.getInputStream()));
-        while ((toCLient = buff.readLine()) != null) {
+        BufferedReader buff = new BufferedReader(new InputStreamReader(pro2.getInputStream())); //Opens bufferedReader of the running command
+        while ((returnLines = buff.readLine()) != null) {
             //System.out.println(s); Debugging
-            writer.println(toCLient);
+            writer.println(returnLines); //Prints to client
         }
         buff.close();
     }
+
 }
