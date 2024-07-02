@@ -22,8 +22,6 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.Scanner;
 
-import static jdk.internal.org.jline.utils.Colors.s;
-
 /**
  * Server class for ISS
  */
@@ -86,13 +84,13 @@ public class Server {
                         writer.flush();
                         break;
                     case 4: //Netstat
-                        String s;
+                        String netstat;
                         String[] commands = {"netstat"};
                         Process pro2 = Runtime.getRuntime().exec(commands); //builds the process
                         BufferedReader buff = new BufferedReader(new InputStreamReader(pro2.getInputStream()));
-                        while ((s = buff.readLine()) != null) {
+                        while ((netstat = buff.readLine()) != null) {
                             //System.out.println(s); Debugging
-                            writer.println(s);
+                            writer.println(netstat);
                         }
                         buff.close();
                         writer.println("end");
@@ -150,7 +148,7 @@ public class Server {
     }
 
     private static String currentUsers() throws UnknownHostException {
-        InetAddress[] userList = InetAddress.getAllByName(InetAddress.getLocalHost().getHostName());
+        //InetAddress[] userList = InetAddress.getAllByName(InetAddress.getLocalHost().getHostName());
         return Arrays.toString(InetAddress.getAllByName(InetAddress.getLocalHost().getHostName()));
     }
 }
