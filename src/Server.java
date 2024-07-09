@@ -56,9 +56,6 @@ public class Server {
 
                 int clientChoice = Character.getNumericValue(bufferedReader.read()); //Gets client option choice
 
-                //System.out.println(clientChoice); //Debugging
-                //writer.println(clientChoice); //Debugging sends value back to client
-
                 switch (clientChoice) {
                     case -1: //Used on start up because it dies after a second set of requests are sent
                         System.out.println("Startup");
