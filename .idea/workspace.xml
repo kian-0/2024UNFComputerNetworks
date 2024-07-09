@@ -76,14 +76,14 @@
   <component name="RunManager" selected="Application.Client">
     <configuration name="Client" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Client" />
-      <module name="Inerative Socket Server" />
+      <module name="Socket Server" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <configuration name="Server" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Server" />
-      <module name="Inerative Socket Server" />
+      <module name="Socket Server" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
