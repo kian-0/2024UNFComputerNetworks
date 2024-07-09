@@ -17,11 +17,12 @@
  */
 
 import java.io.*;
-import java.net.*;
+import java.net.InetSocketAddress;
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Client {
+public class ConcurrentClient {
     //Variable declaration
     private static final ArrayList<Thread> threadArrayList = new ArrayList<>();
 
@@ -136,7 +137,7 @@ public class Client {
 
 }
 
-class myThread extends Thread {
+class ConcurrentThread extends Thread {
     private String ip;
     private int port;
     private int clientChoice;

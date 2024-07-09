@@ -17,13 +17,15 @@
  */
 
 import java.io.*;
-import java.net.*;
+import java.net.InetAddress;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.util.Scanner;
 
 /**
  * Server class for ISS
  */
-public class Server {
+public class ConcurrentServer {
 
     /**
      * main
