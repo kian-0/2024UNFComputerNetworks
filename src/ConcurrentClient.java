@@ -95,13 +95,16 @@ public class ConcurrentClient {
                     }
 
                     //Display total response time and average per request
-                    threadArrayList.get(requests-1).join();
+                    for(int i = 0; i < requests; i++) { //Waits for all threads to die before trying to display total time
+                        threadArrayList.get(i).join();
+                    }
                     long avgTime = timeObject.getTime() / requests;
                     System.out.println("Average response time: " + avgTime + "ms");
                     System.out.println("Total response time: " + timeObject.getTime() + "ms");
 
                     threadArrayList.clear();    //Clears threadArraylist, Bricks and dies when you send another request if removed.
-                    timeObject.clear();
+                    timeObject.clear();         //Clears stored time5
+
                     menu();                     //Calls for menu
                 }
 
@@ -129,22 +132,31 @@ public class ConcurrentClient {
 
 }
 
+/**
+ * Object to keep track of total time from all the threads
+ */
 class timeObject{
     private static long totalTime = 0;
 
+    //Returns total time
     public static long getTime(){
          return totalTime;
     }
 
+    //Adds elapsed time to the object
     public static void addTime(long elapsedTime){
         totalTime += elapsedTime;
     }
 
+    //Clears stored time
     public static void clear(){
         totalTime = 0;
     }
 }
 
+/**
+ * Creates a new thread for each request
+ */
 class ConcurrentThread extends Thread {
     private String ip;
     private int port;
