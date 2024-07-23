@@ -83,7 +83,7 @@ public class Client {
                     //Creates all the threads
                     System.out.println("Sending " + requests + " request(s) to " + ip + ":" + port);
                     for (int i = 0; i < requests; i++) {
-                        ConcurrentThread thread = new ConcurrentThread();
+                        myThread thread = new myThread();
                         thread.setValues(ip, port, clientChoice);
                         threadArrayList.add(thread);
                     }

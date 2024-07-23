@@ -1,5 +1,5 @@
 /**
- * Client.Java
+ * ConcurrentClient.Java
  * -----------------------
  * Authors:
  * Kian Aliwalas
@@ -8,10 +8,10 @@
  * CNT4504 Summer 2024
  * Instructor: Scott Kelly
  * -----------------------
- * Iterative Socket Server
- * Due Date 07/05/24
+ * Concurrent Socket Server
+ * Due Date 07/26/24
  * -----------------------
- * Implement an iterative (single-threaded) server for use in a client-server
+ * Implement a Concurrent (multithreaded) server for use in a client-server
  * Configured to examine, analyze, and study the effects an iterative server
  * has on the efficiency (average turn-around time) of processing client requests.
  */
@@ -80,37 +80,29 @@ public class ConcurrentClient {
                     }
                     scanner.nextLine();             //Clears and buffer/newline issues.
 
-                    //Threading Proto-Type
+                    //Threading
                     //Creates all the threads
                     System.out.println("Sending " + requests + " request(s) to " + ip + ":" + port);
                     for (int i = 0; i < requests; i++) {
                         ConcurrentThread thread = new ConcurrentThread();
-                        thread.setValues(ip, port, clientChoice);
+                        thread.setValues(ip, port, clientChoice, i+1);
                         threadArrayList.add(thread);
                     }
 
                     //Starts up all the threads
-                    long totalTime = 0; //Have to use long as the System.currentTimeMillis is in long
                     for (int i = 0; i < requests; i++) {
-                        long startTime = System.currentTimeMillis(); //Starts "timer". gets start time
                         threadArrayList.get(i).start();//Starts thread
-                        threadArrayList.get(i).join(); //Waits for the thread to die. I think this is fine for single thread not multi? -Kian
-                        long endTime = System.currentTimeMillis(); //Ends "timer". Gets end time
-
-                        long elapsedTime = endTime - startTime; //Calculate elapsedTime.
-                        totalTime += elapsedTime;
-
-                        System.out.println("Time elapsed: " + elapsedTime + "ms");
                     }
 
                     //Display total response time and average per request
-                    long avgTime = totalTime / requests;
+                    threadArrayList.get(requests-1).join();
+                    long avgTime = timeObject.getTime() / requests;
                     System.out.println("Average response time: " + avgTime + "ms");
-                    System.out.println("Total response time: " + totalTime + "ms");
+                    System.out.println("Total response time: " + timeObject.getTime() + "ms");
 
                     threadArrayList.clear();    //Clears threadArraylist, Bricks and dies when you send another request if removed.
+                    timeObject.clear();
                     menu();                     //Calls for menu
-
                 }
 
             } catch (Exception e) {
@@ -137,16 +129,34 @@ public class ConcurrentClient {
 
 }
 
+class timeObject{
+    private static long totalTime = 0;
+
+    public static long getTime(){
+         return totalTime;
+    }
+
+    public static void addTime(long elapsedTime){
+        totalTime += elapsedTime;
+    }
+
+    public static void clear(){
+        totalTime = 0;
+    }
+}
+
 class ConcurrentThread extends Thread {
     private String ip;
     private int port;
     private int clientChoice;
+    private int threadNumber;
 
     @Override
     public void run() {
         try {
             Socket socket = new Socket();
             socket.connect(new InetSocketAddress(ip, port), 3000);
+            long startTime = System.currentTimeMillis(); //Starts "timer". gets start time
             //System.out.println("Connected to " + ip + ":" + port); //For debugging
 
             //Starting sending to server
@@ -165,9 +175,17 @@ class ConcurrentThread extends Thread {
             //Continues to read BufferedReader until it gets reads end from server
             String serverResponse = bufferedReader.readLine(); //Gets the first line
             while (!serverResponse.equals("end")) { //Loops until it gets and end response from the server
-                System.out.println(serverResponse); //prints out server response
+                System.out.println("Thread " + threadNumber + " - "+ serverResponse); //prints out server response
                 serverResponse = bufferedReader.readLine(); //reads next line from server.
             }
+
+            //Gets time lapsed
+            long endTime = System.currentTimeMillis(); //Ends "timer". Gets end time
+            long elapsedTime = endTime - startTime; //Calculate elapsedTime.
+
+            System.out.println("Thread " + threadNumber + " Time elapsed: " + elapsedTime + "ms");
+
+            timeObject.addTime(elapsedTime);
 
             //Closes all the input/output streams
             writer.close();
@@ -187,9 +205,10 @@ class ConcurrentThread extends Thread {
      * @param port         Port of the server
      * @param clientChoice Number of the operation chosen
      */
-    public void setValues(String ip, int port, int clientChoice) {
+    public void setValues(String ip, int port, int clientChoice, int threadNumber) {
         this.ip = ip;
         this.port = port;
         this.clientChoice = clientChoice;
+        this.threadNumber = threadNumber;
     }
 }
