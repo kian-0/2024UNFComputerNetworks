@@ -40,11 +40,10 @@ public class ConcurrentServer {
         //Try-Catch for Server socket
         try (ServerSocket serverSocket = new ServerSocket(port)) //Opens Server
         {
+            System.out.println(InetAddress.getLocalHost());
+            System.out.println("Server is listening on port: " + port); //Debugging
 
             while (true) {
-                System.out.println(InetAddress.getLocalHost());
-                System.out.println("Server is listening on port: " + port); //Debugging
-
                 Socket socket = serverSocket.accept(); //Taking in client connection
                 System.out.println("Client connected");
 
