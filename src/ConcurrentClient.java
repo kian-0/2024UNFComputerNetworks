@@ -44,13 +44,21 @@ public class ConcurrentClient {
                 System.out.println("Connected to " + ip + ":" + port);
                 socket.close(); //Closing it, so it can be reopened by the threads. This is required just to indicate that the server exists
 
+                //Opening file output stream for data collection
+                FileOutputStream responseTime = new FileOutputStream("responseTime.csv");
+                PrintWriter responseTimeWriter = new PrintWriter(responseTime);
+                responseTimeWriter.println("Request type , # of requests , Total time , Average time");
+
                 //Client Menu
                 menu();
                 int clientChoice;
                 while (true) {
+
                     clientChoice = scanner.nextInt();
 
                     if (clientChoice == 0) { //Closes program when 0 is entered
+                        responseTimeWriter.close();
+                        responseTime.close();
                         System.exit(1);
                     }
                     System.out.println("Client choice " + clientChoice); //Debugging
@@ -94,13 +102,15 @@ public class ConcurrentClient {
                         threadArrayList.get(i).start();//Starts thread
                     }
 
-                    //Display total response time and average per request
-                    for(int i = 0; i < requests; i++) { //Waits for all threads to die before trying to display total time
+                    //Waits for all threads to die before trying to display total time
+                    for(int i = 0; i < requests; i++) {
                         threadArrayList.get(i).join();
                     }
+                    //Display total response time and average per request
                     long avgTime = timeObject.getTime() / requests;
                     System.out.println("Average response time: " + avgTime + "ms");
                     System.out.println("Total response time: " + timeObject.getTime() + "ms");
+                    responseTimeWriter.println(clientChoice+ ","+ requests + "," + timeObject.getTime() + "," + avgTime);     //Writes time data to file
 
                     threadArrayList.clear();    //Clears threadArraylist, Bricks and dies when you send another request if removed.
                     timeObject.clear();         //Clears stored time5
