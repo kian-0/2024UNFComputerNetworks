@@ -1,9 +1,22 @@
 # Computer Networks 2024 Project
 ## Overview
 Written for 202450.CNT4504.50238:Computer Networks 
+
 Professor: John Scott Kelly
+
 Summer 2024
+
 Written by Kian Aliwalas & Delanie Crews
+
+## Status
+Completed
+
+## Notable Branches
+master: Contains only Iterative Server/Client
+
+Concurrent-Start: Contains completed Iterative and Concurrent files. Renamed and denoted
+
+They are not merged just to avoid any complications.
 
 ## Project Description 
 This project requires students to implement an iterative (single-threaded) server for use in a client-server configuration to examine, analyze, and study the effects an iterative server has on the efficiency (average turn-around time) of processing client requests.
